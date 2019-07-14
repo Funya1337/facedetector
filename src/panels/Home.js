@@ -6,14 +6,19 @@ const Home = ({ id, go, fetchedUser }) => (
 	<Panel id={id}>
 		<PanelHeader>FunyaCoin</PanelHeader>
 		{fetchedUser &&
-		<Group title="Дорбро пожаловать в FunyaCoin">
-			<ListItem
+		<Group title="Список ваших данных">
+			{/*<ListItem
 				before={fetchedUser.photo_200 ? <Avatar src={fetchedUser.photo_200}/> : null}
 				description={fetchedUser.city && fetchedUser.city.title ? fetchedUser.city.title : ''}
-			>
-				{`${fetchedUser.first_name} ${fetchedUser.last_name}`}
+			>*/}
+			<ListItem>
+				Имя: {`${fetchedUser.first_name}`}
+				<br/> 
+				Фамилия: {`${fetchedUser.last_name}`}
+				<br/>
+				Город: {`${fetchedUser.city.title}`}
 			</ListItem>
-		</Group>}
+		</Group>} 
 
 		<Group title="Сервис для майнинга FunyaCoin">
 			<Div>
