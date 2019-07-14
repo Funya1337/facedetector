@@ -6,7 +6,7 @@ const Home = ({ id, go, fetchedUser }) => (
 	<Panel id={id}>
 		<PanelHeader>FunyaCoin</PanelHeader>
 		{fetchedUser &&
-		<Group title="User Data Fetched with VK Connect">
+		<Group title="Дорбро пожаловать в FunyaCoin">
 			<ListItem
 				before={fetchedUser.photo_200 ? <Avatar src={fetchedUser.photo_200}/> : null}
 				description={fetchedUser.city && fetchedUser.city.title ? fetchedUser.city.title : ''}
@@ -15,10 +15,18 @@ const Home = ({ id, go, fetchedUser }) => (
 			</ListItem>
 		</Group>}
 
-		<Group title="FunyaCoin">
+		<Group title="Сервис для майнинга FunyaCoin">
 			<Div>
 				<Button size="xl" level="2" onClick={go} data-to="persik">
-					Show me FunyaCoin, please
+					Начать играть в FunyaCoin
+				</Button>
+				<br/>
+				<Button size="xl" level="2" onClick={go} data-to="persik">
+					О нас
+				</Button>
+				<br/>
+				<Button size="xl" level="2" onClick={go} data-to="persik">
+					Поделиться
 				</Button>
 			</Div>
 		</Group>
