@@ -7,12 +7,14 @@ import Home from './panels/Home';
 import Persik from './panels/Persik';
 
 class App extends React.Component {
+
 	constructor(props) {
 		super(props);
 
 		this.state = {
 			activePanel: 'home',
 			fetchedUser: null,
+			score: 0,
 		};
 	}
 
@@ -33,10 +35,15 @@ class App extends React.Component {
 		this.setState({ activePanel: e.currentTarget.dataset.to })
 	};
 
+	coins = (e) => {
+    this.setState({ score: this.state.score + 10 })
+		console.log(this.state.score);
+	}
+
 	render() {
 		return (
 			<View activePanel={this.state.activePanel}>
-				<Home id="home" fetchedUser={this.state.fetchedUser} go={this.go} />
+				<Home id="home" scoreHome={this.state.score} fetchedUser={this.state.fetchedUser} go={this.go} coins={this.coins}/>
 				<Persik id="persik" go={this.go} />
 			</View>
 		);
