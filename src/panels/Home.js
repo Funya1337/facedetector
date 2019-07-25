@@ -14,7 +14,7 @@ const Home = ({ id, go, coins, fetchedUser, scoreHome }) => (
 			>
 				{`${fetchedUser.first_name} ${fetchedUser.last_name}`}
 			</ListItem>
-		</Group>} 
+		</Group>}
 
 		<Group title="Сервис для майнинга FunyaCoin">
 			<Div>
