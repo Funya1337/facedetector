@@ -2,6 +2,12 @@ import express from 'express';
 import path from 'path';
 import VK from 'vk-io';
 import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
+import fetch from 'node-fetch';
+import Bluebird from 'Bluebird';
+
+fetch.Promise = Bluebird;
+
 const app = express();
 const db = require('../config/keys').mongoURI;
 require('dotenv').config();
@@ -15,14 +21,28 @@ mongoose
     console.log('MongoDB Not Connected');
   });
 
-app.use('/static', express.static('../build/static'));
+// app.use('/static', express.static('../build/static'));
 
 const vk = new VK({
     token: process.env.TOKEN
 });
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../build/', 'index.html'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// app.get('/', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../build/', 'index.html'));
+// })
+
+app.get('/getusers', (req, res) => {
+   fetch('localhost:8080')
+   .then(res => res.json())
+   .then(data => {
+    res.send({ data });
+  })
+   .catch(err => {
+    res.redirect('/error');
+  });
 })
 
 app.get('/vkusers', (req, res) => {

@@ -7,7 +7,7 @@
     "start": "cross-env PORT=8080 react-scripts start",
     "build": "react-scripts build"
   },
-  "proxy": "http://localhost:3001",
+  "proxy": "http://localhost:8080",
   "keywords": [],
   "author": "",
   "license": "MIT",

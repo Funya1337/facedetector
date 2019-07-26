@@ -14,7 +14,8 @@ class App extends React.Component {
 		this.state = {
 			activePanel: 'home',
 			fetchedUser: null,
-			score: 0,
+			score: 'testmessage',
+			vkusers: [],
 		};
 	}
 
@@ -29,6 +30,9 @@ class App extends React.Component {
 			}
 		});
 		connect.send('VKWebAppGetUserInfo', {});
+		fetch('/users')
+		.then(res => res.json())
+		.then(vkusers => this.setState({ vkusers }));
 	}
 
 	go = (e) => {
@@ -36,14 +40,13 @@ class App extends React.Component {
 	};
 
 	coins = (e) => {
-    this.setState({ score: this.state.score + 10 })
-		console.log(this.state.score);
+		console.log(this.state.vkusers);
 	}
 
 	render() {
 		return (
 			<View activePanel={this.state.activePanel}>
-				<Home id="home" scoreHome={this.state.score} fetchedUser={this.state.fetchedUser} go={this.go} coins={this.coins}/>
+				<Home id="home" vkUsers={this.state.vkusers} scoreHome={this.state.score} fetchedUser={this.state.fetchedUser} go={this.go} coins={this.coins}/>
 				<Persik id="persik" go={this.go} />
 			</View>
 		);
