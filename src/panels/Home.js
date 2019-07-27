@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Panel, ListItem, Button, Group, Div, Avatar, PanelHeader } from '@vkontakte/vkui';
 import './Home.css';
 
-const Home = ({ id, go, vkUsers, coins, fetchedUser }) => (
+const Home = ({ id, go, sendtoExpress, vkUsers, sendImg, loadImg, coins, fetchedUser }) => (
 	<Panel id={id}>
 		<PanelHeader>FunyaCoin</PanelHeader>
 		{fetchedUser &&
@@ -18,29 +18,23 @@ const Home = ({ id, go, vkUsers, coins, fetchedUser }) => (
 
 		<Group title="Сервис для майнинга FunyaCoin">
 			<Div>
-				<Button size="xl" level="2" onClick={go} data-to="persik">
-					Начать играть в FunyaCoin
-				</Button>
-				<br/>
-				<Button size="xl" level="2" onClick={go} data-to="about">
-					О нас
+				<Button size="xl" level="2" onClick={coins} data-to="persik">
+					Get users
 				</Button>
 				<br/>
 				<Button size="xl" level="2" onClick={go} data-to="persik">
-					Поделиться
+					Persik page
 				</Button>
+				<br/>
+				<br/>
+				<center>
+				<input className="inputfile" type="file" onChange={loadImg}/>
+				<br/>
+				<br/>
+				<button onClick={sendImg}>Send</button>
+				</center>
 			</Div>
 		</Group>
-    <div className="button1">
-    <Button level="commerce" className="thatbutton" onClick={coins}>Send</Button>
-    <h1>Ваш счет:</h1>
-    <h1>{console.log(vkUsers)}</h1>
-    </div>
-    <Group>
-      <Div>
-        <center><h3>Пользователи онлайн</h3></center>
-      </Div>
-    </Group>
   </Panel>
 );
 
@@ -49,6 +43,8 @@ Home.propTypes = {
 	go: PropTypes.func.isRequired,
   coins: PropTypes.func.isRequired,
   vkUsers: PropTypes.array.isRequired,
+  loadImg: PropTypes.func.isRequired,
+  sendImg: PropTypes.func.isRequired,
 
 	fetchedUser: PropTypes.shape({
 		photo_200: PropTypes.string,

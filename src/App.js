@@ -5,6 +5,7 @@ import '@vkontakte/vkui/dist/vkui.css';
 
 import Home from './panels/Home';
 import Persik from './panels/Persik';
+import axios from 'axios';
 
 class App extends React.Component {
 
@@ -14,8 +15,8 @@ class App extends React.Component {
 		this.state = {
 			activePanel: 'home',
 			fetchedUser: null,
-			score: 'testmessage',
 			vkusers: [],
+			selectedFile: null,
 		};
 	}
 
@@ -43,10 +44,29 @@ class App extends React.Component {
 		console.log(this.state.vkusers);
 	}
 
+	loadImg = (e) => {
+		this.setState({
+			selectedFile: e.target.files[0]
+		})
+	}
+
+	sendImg = (e) => {
+		axios.post('/upload/', this.state.selectedFile, {
+			onUploadProgress: progressEvent => {
+				console.log('Upload progress: ' + Math.round(progressEvent.loaded / progressEvent.total * 100) + '%')
+			}
+		})
+		.then(res => {
+			let clothes = Object.values(res)[0];
+			console.log(clothes);
+			console.log(res);
+		});
+	}
+
 	render() {
 		return (
 			<View activePanel={this.state.activePanel}>
-				<Home id="home" vkUsers={this.state.vkusers} scoreHome={this.state.score} fetchedUser={this.state.fetchedUser} go={this.go} coins={this.coins}/>
+				<Home id="home" sendImg={this.sendImg} loadImg={this.loadImg} vkUsers={this.state.vkusers} scoreHome={this.state.score} fetchedUser={this.state.fetchedUser} go={this.go} coins={this.coins}/>
 				<Persik id="persik" go={this.go} />
 			</View>
 		);

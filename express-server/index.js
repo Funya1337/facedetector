@@ -34,17 +34,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //   res.sendFile(path.join(__dirname, '../build/', 'index.html'));
 // })
 
-app.get('/getusers', (req, res) => {
-   fetch('localhost:8080')
-   .then(res => res.json())
-   .then(data => {
-    res.send({ data });
-  })
-   .catch(err => {
-    res.redirect('/error');
-  });
-})
-
 app.get('/vkusers', (req, res) => {
   async function run() {
     const response = await vk.api.groups.getMembers({
