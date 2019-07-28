@@ -17,3 +17,4 @@ package-lock.json
 .vscode
 .idea
 .DS_Store
+./python-server/facenet_keras.h5

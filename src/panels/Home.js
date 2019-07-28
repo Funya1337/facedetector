@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Panel, ListItem, Button, Group, Div, Avatar, PanelHeader } from '@vkontakte/vkui';
 import './Home.css';
 
-const Home = ({ id, go, sendtoExpress, vkUsers, sendImg, loadImg, coins, fetchedUser }) => (
+const Home = ({ id, go, sendImg, loadImg, coins, fetchedUser }) => (
 	<Panel id={id}>
 		<PanelHeader>FunyaCoin</PanelHeader>
 		{fetchedUser &&
@@ -42,7 +42,6 @@ Home.propTypes = {
 	id: PropTypes.string.isRequired,
 	go: PropTypes.func.isRequired,
   coins: PropTypes.func.isRequired,
-  vkUsers: PropTypes.array.isRequired,
   loadImg: PropTypes.func.isRequired,
   sendImg: PropTypes.func.isRequired,
 

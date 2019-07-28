@@ -10,6 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from vk import API
 import numpy as np
 import io
+import json
 
 from PIL import Image
 
@@ -31,10 +32,21 @@ def upload(request: WSGIRequest):
     image = Image.open(stream)
 
     image = np.array(image)
-    label = neural_network.process(image)
+    descriptor = neural_network.process(image)
 
-    return django.http.HttpResponse(label)
+    _writeToJSONFile(descriptor)
+
+    return django.http.HttpResponse(descriptor)
 
 def _getMembers(group_id='lanatsummerschool'):
     members = vk_api.groups.getMembers(group_id=group_id)
     return members['items']
+
+def _writeToJSONFile(descriptor):
+    fileName = 'usersData'
+    path = './'
+    data = {'descriptor': [str(item) for item in descriptor]}
+    filePathNameWExt = './' + path + '/' + fileName + '.json'
+    with open(filePathNameWExt, 'w') as fp:
+        json.dump(data, fp)
+        # data['key'] = 'value'

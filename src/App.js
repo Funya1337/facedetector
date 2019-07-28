@@ -57,8 +57,8 @@ class App extends React.Component {
 			}
 		})
 		.then(res => {
-			let clothes = Object.values(res)[0];
-			console.log(clothes);
+			let descriptor = Object.values(res)[0];
+			console.log(descriptor);
 			console.log(res);
 		});
 	}
@@ -66,7 +66,7 @@ class App extends React.Component {
 	render() {
 		return (
 			<View activePanel={this.state.activePanel}>
-				<Home id="home" sendImg={this.sendImg} loadImg={this.loadImg} vkUsers={this.state.vkusers} scoreHome={this.state.score} fetchedUser={this.state.fetchedUser} go={this.go} coins={this.coins}/>
+				<Home id="home" sendImg={this.sendImg} loadImg={this.loadImg} scoreHome={this.state.score} fetchedUser={this.state.fetchedUser} go={this.go} coins={this.coins} />
 				<Persik id="persik" go={this.go} />
 			</View>
 		);
