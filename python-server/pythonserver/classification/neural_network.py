@@ -3,7 +3,10 @@ tf.enable_eager_execution()
 import cv2 as cv
 import numpy as np
 
-model = tf.keras.models.load_model("../facenet_keras.h5")
+def init():
+    global model
+    model = tf.keras.models.load_model("../facenet_keras.h5")
+
 facecascade = cv.CascadeClassifier("../haarcascade_frontalface_default.xml")
 
 class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat',
@@ -16,6 +19,8 @@ def process(image):
         image = cv.cvtColor(image, cv.COLOR_GRAY2RGB)
 
     faces = facecascade.detectMultiScale(image)
+    if len(faces) == 0:
+        return None
     x, y, w, h = faces[0]
 
     image = image[y:y+h, x:x+w]
@@ -27,5 +32,4 @@ def process(image):
 
     descriptor = model.predict(image)[0]
 
-    print(descriptor.shape)
     return descriptor

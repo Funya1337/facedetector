@@ -18,3 +18,4 @@ package-lock.json
 .idea
 .DS_Store
 ./python-server/facenet_keras.h5
+./python-server/pythonserver/db.sqlite3

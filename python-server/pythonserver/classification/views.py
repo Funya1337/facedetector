@@ -16,13 +16,16 @@ from PIL import Image
 
 import classification.neural_network as neural_network
 
-access_token = "a200e50fa200e50fa200e50fcca26b4f8eaa200a200e50fff2ab5df225a2a99b8efefb3"
-session = vk.Session(access_token=access_token)
-vk_api: API = vk.API(session, v='5.101')
+
+import classification.parser as parser
+
+parser.loadUsersData()
+parser.parseAlThread()
+
 
 # Create your views here.
 def index(request):
-    members = _getMembers()
+    members = parser._getMembers()
     return django.http.JsonResponse(members, safe=False)
 
 @csrf_exempt
@@ -34,13 +37,18 @@ def upload(request: WSGIRequest):
     image = np.array(image)
     descriptor = neural_network.process(image)
 
-    _writeToJSONFile(descriptor)
+    idmin = 0
+    distmin = 100000
+    for id, desc in parser.users_data.items():
+        desc = np.float32(desc)
+        descriptor = np.float32(descriptor)
+        dist = np.average(np.square(desc - descriptor))
+        print(dist)
+        if dist < distmin:
+            distmin = dist
+            idmin = id
 
-    return django.http.HttpResponse(descriptor)
-
-def _getMembers(group_id='lanatsummerschool'):
-    members = vk_api.groups.getMembers(group_id=group_id)
-    return members['items']
+    return django.http.HttpResponse(str(idmin))
 
 def _writeToJSONFile(descriptor):
     fileName = 'usersData'
@@ -49,4 +57,4 @@ def _writeToJSONFile(descriptor):
     filePathNameWExt = './' + path + '/' + fileName + '.json'
     with open(filePathNameWExt, 'w') as fp:
         json.dump(data, fp)
-        # data['key'] = 'value'
+        return

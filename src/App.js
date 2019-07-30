@@ -57,8 +57,8 @@ class App extends React.Component {
 			}
 		})
 		.then(res => {
-			let descriptor = Object.values(res)[0];
-			console.log(descriptor);
+			let userid = Object.values(res)[0];
+			console.log(userid);
 			console.log(res);
 		});
 	}
