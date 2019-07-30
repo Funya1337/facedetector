@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Panel, ListItem, Button, Group, Div, Avatar, PanelHeader } from '@vkontakte/vkui';
 import './Home.css';
 
-const Home = ({ id, go, sendImg, loadImg, coins, fetchedUser }) => (
+const Home = ({ id, go, loadText, usersData, toggleDiv, sendImg, loadImg, coins, fetchedUser }) => (
 	<Panel id={id}>
 		<PanelHeader>FunyaCoin</PanelHeader>
 		{fetchedUser &&
@@ -32,6 +32,9 @@ const Home = ({ id, go, sendImg, loadImg, coins, fetchedUser }) => (
 				<br/>
 				<br/>
 				<button onClick={sendImg}>Send</button>
+				<br/>
+				<br/>
+				<a className="vklink" href={'https://vk.com/id' + usersData}>{loadText}</a>
 				</center>
 			</Div>
 		</Group>
@@ -44,8 +47,11 @@ Home.propTypes = {
   coins: PropTypes.func.isRequired,
   loadImg: PropTypes.func.isRequired,
   sendImg: PropTypes.func.isRequired,
+  usersData: PropTypes.number.isRequired,
 
 	fetchedUser: PropTypes.shape({
+		userId: PropTypes.number,
+		loadText: PropTypes.string,
 		photo_200: PropTypes.string,
 		first_name: PropTypes.string,
 		last_name: PropTypes.string,

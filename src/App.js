@@ -17,6 +17,8 @@ class App extends React.Component {
 			fetchedUser: null,
 			vkusers: [],
 			selectedFile: null,
+			usersData: null,
+			loadText: null,
 		};
 	}
 
@@ -58,6 +60,8 @@ class App extends React.Component {
 		})
 		.then(res => {
 			let userid = Object.values(res)[0];
+			this.setState({ usersData: userid });
+			this.setState({ loadText: 'Your profile' })
 			console.log(userid);
 			console.log(res);
 		});
@@ -66,7 +70,7 @@ class App extends React.Component {
 	render() {
 		return (
 			<View activePanel={this.state.activePanel}>
-				<Home id="home" sendImg={this.sendImg} loadImg={this.loadImg} scoreHome={this.state.score} fetchedUser={this.state.fetchedUser} go={this.go} coins={this.coins} />
+				<Home id="home" loadText={this.state.loadText} usersData={this.state.usersData} userId={this.userid} sendImg={this.sendImg} loadImg={this.loadImg} scoreHome={this.state.score} fetchedUser={this.state.fetchedUser} go={this.go} coins={this.coins} />
 				<Persik id="persik" go={this.go} />
 			</View>
 		);
