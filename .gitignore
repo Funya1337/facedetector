@@ -17,5 +17,10 @@ package-lock.json
 .vscode
 .idea
 .DS_Store
-./python-server/facenet_keras.h5
-./python-server/pythonserver/db.sqlite3
+python-server/pythonserver/facenet_keras.h5
+python-server/pythonserver/db.sqlite3
+.env
+/venv
+python-server/pythonserver/pythonserver/__pycache__
+python-server/pythonserver/classification/__pycache__
+python-server/pythonserver/classification/config.py

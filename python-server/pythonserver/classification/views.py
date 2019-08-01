@@ -20,12 +20,13 @@ import classification.neural_network as neural_network
 import classification.parser as parser
 
 parser.loadUsersData()
+#neural_network.init()
 parser.parseAlThread()
 
 
 # Create your views here.
 def index(request):
-    members = parser._getMembers()
+    members = parser._getMembers('wonder_666')
     return django.http.JsonResponse(members, safe=False)
 
 @csrf_exempt
@@ -35,8 +36,11 @@ def upload(request: WSGIRequest):
     image = Image.open(stream)
 
     image = np.array(image)
-    descriptor = neural_network.process(image)
 
+    print(image)
+
+    descriptor = neural_network.process(image)
+    print(type(image), image.shape)
     idmin = 0
     distmin = 100000
     for id, desc in parser.users_data.items():

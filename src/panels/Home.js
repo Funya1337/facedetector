@@ -5,7 +5,7 @@ import './Home.css';
 
 const Home = ({ id, go, loadText, usersData, toggleDiv, sendImg, loadImg, coins, fetchedUser }) => (
 	<Panel id={id}>
-		<PanelHeader>FunyaCoin</PanelHeader>
+		<PanelHeader>FaceDetector</PanelHeader>
 		{fetchedUser &&
 		<Group title="Список ваших данных">
 			<ListItem
@@ -16,7 +16,7 @@ const Home = ({ id, go, loadText, usersData, toggleDiv, sendImg, loadImg, coins,
 			</ListItem>
 		</Group>}
 
-		<Group title="Сервис для майнинга FunyaCoin">
+		<Group title="Сервис для нахождения профиля пользователя ВК по его фотографии">
 			<Div>
 				<Button size="xl" level="2" onClick={coins} data-to="persik">
 					Get users

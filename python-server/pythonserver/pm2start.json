@@ -1,0 +1,12 @@
+ {
+  "apps": [
+    {
+      "name": "pythonserver",
+      "cwd": "/home/ubuntu/websites/funyacoin/python-server/pythonserver",
+      "args": "runserver",
+      "script": "manage.py",
+      "exec_mode": "fork",
+      "exec_interpreter": "python"
+    }
+  ]
+}

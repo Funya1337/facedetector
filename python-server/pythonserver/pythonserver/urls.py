@@ -20,6 +20,6 @@ import classification.views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    path('users/', classification.views.index),
-    path('upload/', classification.views.upload)
+    path('api/users/', classification.views.index),
+    path('api/upload/', classification.views.upload)
 ]

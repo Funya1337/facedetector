@@ -33,7 +33,7 @@ class App extends React.Component {
 			}
 		});
 		connect.send('VKWebAppGetUserInfo', {});
-		fetch('/users')
+		fetch('api/users')
 		.then(res => res.json())
 		.then(vkusers => this.setState({ vkusers }));
 	}
@@ -53,7 +53,7 @@ class App extends React.Component {
 	}
 
 	sendImg = (e) => {
-		axios.post('/upload/', this.state.selectedFile, {
+		axios.post('api/upload/', this.state.selectedFile, {
 			onUploadProgress: progressEvent => {
 				console.log('Upload progress: ' + Math.round(progressEvent.loaded / progressEvent.total * 100) + '%')
 			}

@@ -7,16 +7,23 @@ def init():
     global model
     model = tf.keras.models.load_model("../facenet_keras.h5")
 
-facecascade = cv.CascadeClassifier("../haarcascade_frontalface_default.xml")
-
-class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat',
-               'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
 
 def process(image):
+    facecascade = cv.CascadeClassifier("../haarcascade_frontalface_default.xml")
     if image.shape[-1] == 4:
         image = cv.cvtColor(image, cv.COLOR_RGBA2RGB)
-    elif image.shape[-1] == 1:
+    elif len(image.shape) == 2:
         image = cv.cvtColor(image, cv.COLOR_GRAY2RGB)
+
+    SIZE = 640
+    h, w = image.shape[:2]
+    if w > h:
+        w = SIZE * w // h
+        h = SIZE
+    else:
+        h = SIZE * h // w
+        w = SIZE
+    image = cv.resize(image, (w, h))
 
     faces = facecascade.detectMultiScale(image)
     if len(faces) == 0:
